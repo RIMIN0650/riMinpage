@@ -1,0 +1,2 @@
+# riMinpage
+social network service
