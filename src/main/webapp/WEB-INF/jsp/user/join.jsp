@@ -11,27 +11,32 @@
 <body>
 	
 	<div id="wrap">
-		<header class="d-flex align-items-center justify-content-center">
-				<h1>riMinpage</h1>
-		</header>
-		<section class="d-flex justify-content-center">
-			<div class="my-3">
-				<div class="d-flex mb-3">
-					<input type="text" class="form-control col-6" placeholder="ID" id="identifier">
-					<button type="button" class="ml-3 btn btn-info" id="checkIdBtn">중복확인</button>
+		<div id="main-join" class="square-border mt-4">
+			<header class="d-flex align-items-center justify-content-center">
+					<h1>riMinpage</h1>
+			</header>
+			<section class="d-flex justify-content-center">
+				<div class="my-3 text-center">
+					<div class="d-flex mb-3 justify-content-center">
+						<input type="text" class="form-control col-6" placeholder="ID" id="identifier">
+						<button type="button" class="ml-3 btn btn-info" id="checkIdBtn">중복확인</button>
+					</div>
+					<center>
+						<input type="password" class="form-control col-10 mb-3" placeholder="Password" id="password">
+						<input type="password" class="form-control col-10 mb-3" placeholder="Password 확인" id="checkPwd">
+						<input type="text" class="form-control col-10 mb-3" placeholder="UserName" id="name">
+						<input type="text" class="form-control col-10 mb-3" placeholder="e-mail" id="email">
+					</center>
+					<button type="button" class="btn btn-info col-10" id="joinBtn">회원가입</button>
 				</div>
-				<input type="text" class="form-control col-10 mb-3" placeholder="Password" id="password">
-				<input type="text" class="form-control col-10 mb-3" placeholder="Password 확인" id="checkPwd">
-				<input type="text" class="form-control col-10 mb-3" placeholder="UserName" id="name">
-				<input type="text" class="form-control col-10 mb-3" placeholder="e-mail" id="email">
-				<button type="button" class="btn btn-info col-10" id="joinBtn">회원가입</button>
-			</div>
-		</section>
-		<footer>
-		
-		</footer>
-		
-	
+			</section>
+		</div>
+		<div class="d-flex justify-content-center">
+			<footer id="footer" class="square-border mt-3 d-flex justify-content-center align-items-center">
+				<div>이미 계정이 있으신가요?&nbsp; </div>
+				<a href="#">로그인</a>
+			</footer>
+		</div>	
 	</div>
 
 
@@ -46,19 +51,62 @@
 	$(document).ready(function(){
 		
 		let id = $("#identifier").val();
-		password
-		checkPwd
-		name
-		email
+		let password = $("#password").val();
+		let checkPwd = $("#checkPwd").val();
+		let name = $("#name").val();
+		let email = $("#email").val();
 		
-		
-		$("#joinBtn").on("click",function(){
-			alert("회원가입 버튼 정상 작동");
-		});
 		$("#checkIdBtn").on("click",function(){
 			alert("중복 버튼 정상 작동")
 		});
 		
+		$("#joinBtn").on("click",function(){
+			
+			let id = $("#identifier").val();
+			let password = $("#password").val();
+			let checkPwd = $("#checkPwd").val();
+			let name = $("#name").val();
+			let email = $("#email").val();
+			
+			if(id == ""){
+				alert("아이디를 입력하세요.");
+				return;
+			}
+			if(password == ""){
+				alert("비밀번호를 입력하세요.");
+				return;
+			}
+			if(password != checkPwd){
+				alert("비밀번호를 확인하세요.");
+				return;
+			}
+			if(name == ""){
+				alert("이름을 입력하세요.");
+				return;
+			}
+			if(email == ""){
+				alert("이메일을 입력하세요.");
+			}
+			
+			$.ajax({
+				type:"post"
+				, url:"/user/join"
+				, data:{"loginId":id, "password":password, "name":name, "email":email}
+				, success:function(data){
+					if(data.result == "success"){
+						location.href = "/user/login"
+					} else {
+						alert("회원 가입 실패");
+					}
+				}
+				, error:function(){
+					alert("회원 가입 에러");
+				}
+				
+				
+			});
+			
+		});
 		
 	});
 
