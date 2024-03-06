@@ -4,7 +4,7 @@
 	height:800px;
 	margin:0 auto;
 }
-#main-join{
+#main-page{
 	width:400px;
 	height:500px;
 	margin:0 auto;
@@ -13,7 +13,8 @@ header{
 	height:100px;
 }
 section{
-	height:500px;
+	height:400px;
+	width:400px;
 }
 .square-border{
 	border:2px solid;

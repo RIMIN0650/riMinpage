@@ -11,7 +11,7 @@
 <body>
 	
 	<div id="wrap">
-		<div id="main-join" class="square-border mt-4">
+		<div id="main-page" class="square-border mt-4">
 			<header class="d-flex align-items-center justify-content-center">
 					<h1>riMinpage</h1>
 			</header>
@@ -34,7 +34,7 @@
 		<div class="d-flex justify-content-center">
 			<footer id="footer" class="square-border mt-3 d-flex justify-content-center align-items-center">
 				<div>이미 계정이 있으신가요?&nbsp; </div>
-				<a href="#">로그인</a>
+				<a href="/user/login">로그인</a>
 			</footer>
 		</div>	
 	</div>
