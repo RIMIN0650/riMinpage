@@ -1,4 +1,4 @@
-package com.rimin.riMinpage;
+package com.rimin.riMinpage.user;
 
 import java.util.HashMap;
 import java.util.Map;
