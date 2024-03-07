@@ -94,6 +94,7 @@
 				, data:{"loginId":id, "password":password, "name":name, "email":email}
 				, success:function(data){
 					if(data.result == "success"){
+						alert("회원가입 성공! 환영합니다~ 로그인 페이지로 이동합니다.");
 						location.href = "/user/login"
 					} else {
 						alert("회원 가입 실패");
