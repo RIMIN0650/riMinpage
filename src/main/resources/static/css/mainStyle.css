@@ -1,0 +1,19 @@
+@charset "UTF-8";
+#wrap{
+	width:1200px;
+	height:800px;
+	margin:0 auto;
+}
+.main-menu{
+	width:200px;
+	height:800px;
+}
+.logo{
+	height:100px;
+}
+.menu-link{
+	height:700px;
+}
+.main-contents{
+	width:1200px;
+}

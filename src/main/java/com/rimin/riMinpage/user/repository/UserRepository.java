@@ -12,4 +12,10 @@ public interface UserRepository {
 			, @Param("password") String password
 			, @Param("name") String name
 			, @Param("email") String email);
+	
+	
+	// Id 중복 여부 확인
+	public int checkDupId(@Param("loginId") String loginId);
+	
+	
 }

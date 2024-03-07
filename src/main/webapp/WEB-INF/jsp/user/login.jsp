@@ -17,12 +17,12 @@
 			</header>
 			<div class="d-flex align-items-center">
 			<section>
-			<center>
-				<input type="text" class="form-control col-10 mb-3" placeholder="ID">
-				<input type="password" class="form-control col-10 mb-3" placeholder="Password">
-				<button type="button" class="btn btn-success col-10 my-3">로그인</button>
-			</center>
-			<hr align="center" style="border: dashed 1px black; width: 50%;"><br><br>
+				<center>
+					<input type="text" class="form-control col-10 mb-3" placeholder="ID">
+					<input type="password" class="form-control col-10 mb-3" placeholder="Password">
+					<button type="button" class="btn btn-success col-10 my-3">로그인</button>
+				</center>
+				<hr align="center" style="border: dashed 1px black; width: 60%;"><br><br>
 				<div class="d-flex justify-content-center">
 					<a href="#">비밀번호를 잊으셨나요?</a>
 				</div>

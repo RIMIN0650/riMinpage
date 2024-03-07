@@ -17,9 +17,13 @@
 			</header>
 			<section class="d-flex justify-content-center">
 				<div class="my-3 text-center">
-					<div class="d-flex mb-3 justify-content-center">
+					<div class="mb-3 d-flex justify-content-center align-items-bottom">
 						<input type="text" class="form-control col-6" placeholder="ID" id="identifier">
 						<button type="button" class="ml-3 btn btn-info" id="checkIdBtn">중복확인</button>
+					</div>
+					<div>
+						<div class="text-danger small d-none mb-3" id="duplicateId">중복된 id 입니다.</div>
+						<div class="text-info small d-none mb-3" id="availableId">사용 가능한 id 입니다.</div>
 					</div>
 					<center>
 						<input type="password" class="form-control col-10 mb-3" placeholder="Password" id="password">
@@ -50,16 +54,51 @@
 <script>
 	$(document).ready(function(){
 		
-		let id = $("#identifier").val();
-		let password = $("#password").val();
-		let checkPwd = $("#checkPwd").val();
-		let name = $("#name").val();
-		let email = $("#email").val();
+		// 중복된 아이디일때 회원가입 안되도록 막기 위해 변수 선언
+		let checkDup;
+		let checkIdBtn = 0;
 		
-		$("#checkIdBtn").on("click",function(){
-			alert("중복 버튼 정상 작동")
+		// 아이디를 수정했으면 아이디 중복확인을 다시 하도록 변수 초기화해줌
+		$("#identifier").on("input",function(){
+			checkIdBtn = 0;
+			$("#duplicateId").addClass("d-none");
+			$("#availableId").addClass("d-none");
 		});
 		
+		
+		$("#checkIdBtn").on("click",function(){
+
+			let id = $("#identifier").val();
+			
+			if(id == ""){
+				alert("Id를 입력하세요");
+			}
+			
+			$.ajax({
+				type:"get"
+				, url:"/user/duplicate-id"
+				, data:{"loginId" : id}
+				, success:function(data){
+					
+					checkIdBtn = 1; // 아이디 중복 확인 버튼을 누른 경우 1로 바꿔서 버튼을 눌렀음을 확인
+					if((id != "")){
+						if(data.isDuplicateId){
+							checkDup = data.isDuplicateId;
+							$("#duplicateId").removeClass("d-none");
+							$("#availableId").addClass("d-none");
+						} else {
+							checkDup = data.isDuplicateId;
+							$("#duplicateId").addClass("d-none");
+							$("#availableId").removeClass("d-none");
+						}
+					}
+				}
+				, error:function(){
+					alert("중복 확인 에러");
+				}
+			});
+		});
+				
 		$("#joinBtn").on("click",function(){
 			
 			let id = $("#identifier").val();
@@ -86,6 +125,7 @@
 			}
 			if(email == ""){
 				alert("이메일을 입력하세요.");
+				return;
 			}
 			
 			$.ajax({
@@ -93,11 +133,15 @@
 				, url:"/user/join"
 				, data:{"loginId":id, "password":password, "name":name, "email":email}
 				, success:function(data){
-					if(data.result == "success"){
+					if(checkIdBtn != 0){
+					if(data.result == "success" && !(checkDup)){
 						alert("회원가입 성공! 환영합니다~ 로그인 페이지로 이동합니다.");
 						location.href = "/user/login"
 					} else {
-						alert("회원 가입 실패");
+						alert("회원 가입 실패. 아이디를 확인하세요.");
+					}
+					} else {
+						alert("id 중복을 확인하세요");
 					}
 				}
 				, error:function(){

@@ -6,17 +6,31 @@
 <meta charset="UTF-8">
 <title>riMin Home</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
-<link rel="stylesheet" href="/static/css/style.css" type="text/css">
+<link rel="stylesheet" href="/static/css/mainStyle.css" type="text/css">
 </head>
 <body>
 	
-	<div id="wrap" class="bg-success">
+	<div id="wrap">
 		<section class="contents d-flex">
-			<nav>
-				
+			<nav class="main-menu">
+				<div class="d-flex justify-content-center align-items-center logo bg-info">
+					<h1>riMin</h1>
+				</div>
+				<div class="d-flex justify-content-center align-items-center menu-link">
+				<ul class="nav flex-column flex-item menu-link">
+					<center>
+						<li class="nav-item"><button class="btn btn-success my-3">Home</button>
+						<li class="nav-item"><button class="btn btn-success my-3">Message</button>
+						<li class="nav-item"><button class="btn btn-success my-3">Search</button>
+						<li class="nav-item"><button class="btn btn-success my-3">Like</button>
+						<li class="nav-item"><button class="btn btn-success my-3">Add</button>
+						<li class="nav-item"><button class="btn btn-success my-3">Setting</button>
+					</center>
+				</ul>
+				</div>
 			</nav>
-			<article>
-			
+			<article class="main-contents bg-secondary">
+				
 			</article>
 		</section>
 		<footer>
