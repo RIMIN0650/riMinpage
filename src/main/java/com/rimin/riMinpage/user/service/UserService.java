@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.rimin.riMinpage.common.EncryptUtils;
+import com.rimin.riMinpage.user.domain.User;
 import com.rimin.riMinpage.user.repository.UserRepository;
 
 @Service
@@ -32,4 +33,13 @@ public class UserService {
 		}
 		
 	}
+	
+	// 로그인 기능
+	public User getUser(String loginId, String password) {
+		String encryptPassword = EncryptUtils.md5(password);
+		return userRepository.checkUser(loginId, encryptPassword);
+	}
+	
+	
+	
 }

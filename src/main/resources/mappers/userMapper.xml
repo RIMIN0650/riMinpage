@@ -37,6 +37,27 @@
   		
   		</select>
   
+  
+  <!-- 로그인시 아이디와 비밀번호 일치 여부 확인 -->
+  	<select id="checkUser" parameterType="map"
+  	resultType="com.rimin.riMinpage.user.domain.User">
+  		SELECT
+  			`id`
+  			, `loginId`
+  			, `password`
+  			, `name`
+  			, `email`
+  			, `createdAt`
+  			, `updatedAt`
+  		FROM
+  			`rimin_user`
+  		WHERE
+  			`loginId` = #{loginId}
+  			AND `password` = #{password}
+  	
+  	
+  	</select>
+  	
   	
   
   

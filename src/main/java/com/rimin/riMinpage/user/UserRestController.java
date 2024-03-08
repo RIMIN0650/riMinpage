@@ -9,7 +9,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.rimin.riMinpage.user.domain.User;
 import com.rimin.riMinpage.user.service.UserService;
+
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 //@Controller + @ResponseBody = @RestController
 @RestController 
 public class UserRestController {
@@ -55,7 +59,31 @@ public class UserRestController {
 	
 	
 	
-	
-	
-	
+	// 로그인 기능
+	@PostMapping("/user/login")
+	public Map<String, String> login(
+			@RequestParam("loginId") String loginId
+			, @RequestParam("password") String password
+			, HttpServletRequest request){
+		
+		User user = userService.getUser(loginId, password);
+		
+		Map<String, String> resultMap = new HashMap<>();
+		
+		if(user != null) {
+			// 사용자 정보를 session 에 저장해서
+			// HttpServletRequest 로부터 Session 객체를 얻어온다.
+			HttpSession session = request.getSession();
+			// 세션에 로그인 되었다는 정보, 사용자 정보를 저장하고
+			// 세션에 사용자 정보가 저장되어있으면 로그인
+			
+			session.setAttribute("userId",  user.getId());
+			session.setAttribute("loginId", user.getLoginId());
+			
+			resultMap.put("result",  "success");
+		} else {
+			resultMap.put("result",  "fail");
+		}
+		return resultMap;
+	}
 }
