@@ -14,7 +14,7 @@
 	<div id="wrap">
 		<section class="contents d-flex">
 			<nav class="main-menu">
-				<div class="d-flex justify-content-center align-items-center logo bg-info">
+				<div class="d-flex justify-content-center align-items-center logo bg-success">
 					<h1>riMin</h1>
 				</div>
 				<div class="d-flex justify-content-center align-items-center menu-link">
