@@ -21,12 +21,6 @@ public class UserController {
 		return "user/login";
 	}
 	
-	// 메인 페이지
-	@GetMapping("/user/homepage")
-	public String mainPage() {
-		return "user/homepage";
-	}
-	
 	// 로그아웃
 	@GetMapping("/user/logout")
 	public String logout(HttpServletRequest request) {

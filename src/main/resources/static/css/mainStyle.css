@@ -17,6 +17,21 @@
 .main-contents{
 	width:1200px;
 }
+.post-container{
+	width:800px;
+	height:400px;
+	margin:0 auto;
+}
+.show-id{
+	height:50px;
+}
+.show-image{
+	height:50px;
+}
+.show-reply{
+	height:200px;
+}
+
 .logo-status{
 	height:100px;
 }

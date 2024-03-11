@@ -72,7 +72,7 @@
 				, success:function(data){
 					if(data.result == "success"){
 						alert("환영합니다! " + id + "님");
-						location.href = "/user/homepage";
+						location.href = "/post/homepage";
 					} else {
 						alert("로그인 실패");
 					}
