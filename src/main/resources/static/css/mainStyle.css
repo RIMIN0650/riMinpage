@@ -33,7 +33,23 @@
 .show-reply{
 	height:200px;
 }
-
+.post-box{
+	height:800px;
+	width:900px;
+	margin:0 auto;
+}
+.post-content{
+	height:650px;
+	width:800px;
+	margin:0 auto;
+}
 .logo-status{
 	height:100px;
+}
+.input-file-button{
+	padding: 6px 25px;
+	background-color:#FF6600;
+	border-radius: 4px;
+	color:white;
+	cursor: pointer;
 }

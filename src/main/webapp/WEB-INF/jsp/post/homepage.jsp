@@ -21,12 +21,12 @@
 				<div class="d-flex justify-content-center align-items-center menu-link">
 				<ul class="nav flex-column flex-item menu-link">
 					<center>
-						<li class="nav-item"><button class="btn btn-success my-3">Home</button>
-						<li class="nav-item"><button class="btn btn-success my-3">Message</button>
-						<li class="nav-item"><button class="btn btn-success my-3">Search</button>
-						<li class="nav-item"><button class="btn btn-success my-3">Like</button>
-						<li class="nav-item"><button class="btn btn-success my-3">Add</button>
-						<li class="nav-item"><button class="btn btn-success my-3">Setting</button>
+						<li class="nav-item"><button class="btn btn-success my-3" id="homeBtn">Home</button>
+						<li class="nav-item"><button class="btn btn-success my-3" id="msgBtn">Message</button>
+						<li class="nav-item"><button class="btn btn-success my-3" id="searchBtn">Search</button>
+						<li class="nav-item"><button class="btn btn-success my-3" id="likeBtn">Like</button>
+						<li class="nav-item"><button class="btn btn-success my-3" id="addBtn">Add</button>
+						<li class="nav-item"><button class="btn btn-success my-3" id="settingBtn">Setting</button>
 					</center>
 				</ul>
 				</div>
@@ -41,7 +41,7 @@
 				
 				<div>
 					<div class="post-container bg-white mt-3 mb-3">
-						<div class="show-id bg-info d-flex align-items-end mx-1 mt-1">작성자 아이디 칸</div>
+						<div class="show-id bg-info d-flex align-items-end mx-1 mt-1">@${loginId }</div>
 						<div class="show-image bg-danger mx-1 my-1">사진 칸</div>
 						<div class="show-content bg-primary mx-1 my-1">게시글 칸</div>
 						<div class="d-flex justify-content-top align-items-center">
@@ -50,7 +50,7 @@
 							<div>14개</div>
 						</div>
 						<div class="show-reply bg-warning my-1 mx-1">
-							<b>rimin</b> 2000년 3월 23일
+							<b>${loginId }</b> 2000년 3월 23일
 						</div>
 						<div class="d-flex justify-content-center align-items-center my-3">
 							<input type="text" class="form-control text-input col-11 my-3 mr-1" id="reply-content">
@@ -90,7 +90,24 @@
 			$("#fullHeartBtn").addClass("d-none");
 		});
 		
-		
+		$("#homeBtn").on("click",function(){
+			alert("homeBtn");
+		});
+		$("#msgBtn").on("click",function(){
+			alert("msgBtn");
+		});
+		$("#searchBtn").on("click",function(){
+			alert("searchBtn");
+		});
+		$("#likeBtn").on("click",function(){
+			alert("likeBtn");
+		});
+		$("#addBtn").on("click",function(){
+			location.href = "/post/uploadpost";
+		});
+		$("#settingBtn").on("click",function(){
+			alert("settingBtn");
+		});
 		
 		
 	});
