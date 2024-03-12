@@ -40,14 +40,21 @@
 				
 				
 				<div>
-					<div class="post-container bg-success mb-3">
-						<div class="show-id bg-info">작성자 아이디 칸</div>
-						<div class="show-image bg-danger">사진 칸</div>
-						<button type="button" class="btn text-white"><i class="bi bi-heart text-danger"></i></button>
-						<button type="button" class="btn"><i class="bi bi-heart-fill text-danger"></i></button>
-						<div class="show-reply bg-warning"><b>rimin</b> 2000년 3월 23일</div>
-						<div class="d-flex justify-content-center align-items-center mt-3">
-							<input type="text" class="form-control text-input col-10 mr-3"><button type="button" class="btn btn-info" id="postReplyBtn">게시</button>
+					<div class="post-container bg-white mt-3 mb-3">
+						<div class="show-id bg-info d-flex align-items-end mx-1 mt-1">작성자 아이디 칸</div>
+						<div class="show-image bg-danger mx-1 my-1">사진 칸</div>
+						<div class="show-content bg-primary mx-1 my-1">게시글 칸</div>
+						<div class="d-flex justify-content-top align-items-center">
+							<button type="button" class="btn text-white" id="emptyHeartBtn"><i class="bi bi-heart text-danger"></i></button>
+							<button type="button" class="btn d-none" id="fullHeartBtn"><i class="bi bi-heart-fill text-danger"></i></button>
+							<div>14개</div>
+						</div>
+						<div class="show-reply bg-warning my-1 mx-1">
+							<b>rimin</b> 2000년 3월 23일
+						</div>
+						<div class="d-flex justify-content-center align-items-center my-3">
+							<input type="text" class="form-control text-input col-11 my-3 mr-1" id="reply-content">
+							<button type="button" class="btn btn-info" id="postReplyBtn">게시</button>
 						</div>
 					</div>
 				</div>
@@ -69,10 +76,20 @@
 <script>
 	$(document).ready(function(){
 		$("#postReplyBtn").on("click",function(){
-			alert("댓글 작성 버튼");
-			
-		
+			let reply = $("#reply-content").val();
+			alert(reply);
 		});
+		$("#emptyHeartBtn").on("click",function(){
+			alert("좋아요");
+			$("#emptyHeartBtn").addClass("d-none");
+			$("#fullHeartBtn").removeClass("d-none");
+		});
+		$("#fullHeartBtn").on("click",function(){
+			alert("좋아요 취소");
+			$("#emptyHeartBtn").removeClass("d-none");
+			$("#fullHeartBtn").addClass("d-none");
+		});
+		
 		
 		
 		

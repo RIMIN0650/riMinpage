@@ -19,13 +19,15 @@
 }
 .post-container{
 	width:800px;
-	height:400px;
 	margin:0 auto;
 }
 .show-id{
 	height:50px;
 }
 .show-image{
+	height:50px;
+}
+.show-content{
 	height:50px;
 }
 .show-reply{
