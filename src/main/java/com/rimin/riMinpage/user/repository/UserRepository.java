@@ -25,4 +25,10 @@ public interface UserRepository {
 			@Param("loginId") String loginId
 			, @Param("password") String password);
 	
+	
+	//아이디와 일치하는 한 행의 정보를 return
+	public User selectUserById(@Param("id") int id);
+	
+	
+	
 }

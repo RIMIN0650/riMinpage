@@ -41,5 +41,9 @@ public class UserService {
 	}
 	
 	
-	
+	//userid를 전달받고 대응되는 사용자 정보를 return
+	// 아이디와 일치하는 한 행의 정보를 return 받음
+	public User getUserById(int id){
+		return userRepository.selectUserById(id);
+	}
 }

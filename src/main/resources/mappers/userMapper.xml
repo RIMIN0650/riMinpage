@@ -59,6 +59,23 @@
   	</select>
   	
   	
+  	<select id="selectUserById" parameterType="int"
+  	resultType="com.rimin.riMinpage.user.domain.User">
+  		SELECT
+  			`id`
+  			, `loginId`
+  			, `password`
+  			, `name`
+  			, `email`
+  			, `createdAt`
+  			, `updatedAt`
+  		FROM
+  			`rimin_user`
+  		WHERE
+  			`id` = #{id}
+  	</select>
+  	
+  	
   
   
   </mapper>

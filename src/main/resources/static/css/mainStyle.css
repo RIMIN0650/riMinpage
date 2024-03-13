@@ -24,9 +24,7 @@
 .show-id{
 	height:50px;
 }
-.show-image{
-	height:50px;
-}
+
 .show-content{
 	height:50px;
 }
@@ -35,7 +33,7 @@
 }
 .post-box{
 	height:800px;
-	width:900px;
+	width:830px;
 	margin:0 auto;
 }
 .post-content{

@@ -15,8 +15,8 @@
 	<div id="wrap">
 		<section class="contents d-flex">
 			<nav class="main-menu">
-				<div class="d-flex justify-content-center align-items-center logo bg-success">
-					<h1>riMin</h1>
+				<div class="d-flex justify-content-center align-items-center logo bg-dark">
+					<h1 class="text-white"><i class="bi bi-moon-stars"></i></h1>
 				</div>
 				<div class="d-flex justify-content-center align-items-center menu-link">
 				<ul class="nav flex-column flex-item menu-link">
@@ -31,39 +31,61 @@
 				</ul>
 				</div>
 			</nav>
-			<article class="main-contents bg-secondary">
-				<div class="logo-status d-flex justify-content-end align-items-center">
+			<article class="main-contents">
+				<div class="logo-status d-flex justify-content-between align-items-center">
 					<c:if test="${not empty userId }">
+						<h1 class="ml-3">riMinPage</h1>
 						<div class="mr-3">${loginId } 님 <a href="/user/logout"> 로그아웃</a></div>
 					</c:if>
 				</div>
 				
 				
-				<div>
-					<div class="post-container bg-white mt-3 mb-3">
-						<div class="show-id bg-info d-flex align-items-end mx-1 mt-1">@${loginId }</div>
-						<div class="show-image bg-danger mx-1 my-1">사진 칸</div>
-						<div class="show-content bg-primary mx-1 my-1">게시글 칸</div>
+				<!-- 타임라인 layout -->
+				<div class="timeline my-4">
+				<c:forEach var="post" items="${postList }">
+				<!-- card -->
+					<div class="post-container bg-white mt-3 mb-3 card">
+						<div>
+							<div class="show-id bg-info d-flex justify-content-between align-items-end mx-1 mt-1">
+								@${post.userLoginId }
+								<i class="bi bi-three-dots-vertical"></i>
+							</div>
+						</div>
+						<div class="show-image bg-danger mx-1 my-1">
+							<img src="${post.imagePath }" class="w-100">
+						</div>
 						<div class="d-flex justify-content-top align-items-center">
 							<button type="button" class="btn text-white" id="emptyHeartBtn"><i class="bi bi-heart text-danger"></i></button>
 							<button type="button" class="btn d-none" id="fullHeartBtn"><i class="bi bi-heart-fill text-danger"></i></button>
 							<div>14개</div>
 						</div>
-						<div class="show-reply bg-warning my-1 mx-1">
-							<b>${loginId }</b> 2000년 3월 23일
+						<div class="show-reply bg-warning my-1 mx-1 p-2">
+							<b>${post.userLoginId }</b> ${post.contents }
 						</div>
-						<div class="d-flex justify-content-center align-items-center my-3">
-							<input type="text" class="form-control text-input col-11 my-3 mr-1" id="reply-content">
-							<button type="button" class="btn btn-info" id="postReplyBtn">게시</button>
+						<hr>
+						<!-- reply -->
+						<div class="my-3 mx-1">
+							<div>
+								<div>댓글</div>
+								<div><b>asdf</b> &nbsp; zxcijuzcviizcxv!</div>
+								<div><b>asdf</b> &nbsp; zxcijuzcviizcxv!</div>
+							</div>
+							<div class="d-flex justify-content-center align-items-center">
+								<input type="text" class="form-control text-input col-11 my-3 mr-1" id="reply-content">
+								<button type="button" class="btn btn-info" id="postReplyBtn">게시</button>
+							</div>
 						</div>
+						<!-- /reply -->
 					</div>
+					<!-- card -->
+					</c:forEach>
 				</div>
+				<!-- /타임라인 layout -->
 			</article>
 		</section>
 		<footer>
 			<div>@riMinpage</div>
 		</footer>
-	
 	</div>
 
 
