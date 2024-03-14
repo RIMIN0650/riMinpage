@@ -50,6 +50,7 @@
 			let contents = $("#contentsInput").val();
 			let file = $("#fileInput")[0].files[0];
 			
+			// $("#fileInput").click(); // 클릭한 것 과 같은 기능
 			
 			if(contents == ""){
 				alert("내용을 입력해주세요");

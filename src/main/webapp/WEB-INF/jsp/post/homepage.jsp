@@ -46,7 +46,7 @@
 				<!-- card -->
 					<div class="post-container bg-white mt-3 mb-3 card">
 						<div>
-							<div class="show-id bg-info d-flex justify-content-between align-items-end mx-1 mt-1">
+							<div class="show-id d-flex justify-content-between align-items-end mx-1 mt-1">
 								@${post.userLoginId }
 								<i class="bi bi-three-dots-vertical"></i>
 							</div>
@@ -55,8 +55,8 @@
 							<img src="${post.imagePath }" class="w-100">
 						</div>
 						<div class="d-flex justify-content-top align-items-center">
-							<button type="button" class="btn text-white" id="emptyHeartBtn"><i class="bi bi-heart text-danger"></i></button>
-							<button type="button" class="btn d-none" id="fullHeartBtn"><i class="bi bi-heart-fill text-danger"></i></button>
+							<button type="button" class="btn text-white like-icon" data-post-id="${post.postId }"><i class="bi bi-heart text-danger"></i></button>
+							<!-- <button type="button" class="btn d-none" id="fullHeartBtn"><i class="bi bi-heart-fill text-danger"></i></button>  -->
 							<div>14개</div>
 						</div>
 						<div class="show-reply bg-warning my-1 mx-1 p-2">
@@ -71,8 +71,8 @@
 								<div><b>asdf</b> &nbsp; zxcijuzcviizcxv!</div>
 							</div>
 							<div class="d-flex justify-content-center align-items-center">
-								<input type="text" class="form-control text-input col-11 my-3 mr-1" id="reply-content">
-								<button type="button" class="btn btn-info" id="postReplyBtn">게시</button>
+								<input type="text" class="form-control text-input col-11 my-3 mr-1" id="reply${post.postId }">
+								<button type="button" class="btn btn-info reply-btn" data-post-id="${post.postId }">게시</button>
 							</div>
 						</div>
 						<!-- /reply -->
@@ -97,6 +97,66 @@
 
 <script>
 	$(document).ready(function(){
+		
+		$(".like-icon").on("click",function(){
+			
+			//이벤트가 발생한 태그 객체 > this
+			let postId = $(this).data("post-id");
+			
+			$.ajax({
+					type:"post"
+					, url:"/post/like"
+					, data:{"postId" : postId}
+					, success:function(data){
+						if(data.result == "success"){
+							location.reload();
+						} else {
+							alert("좋아요 실패");
+						}
+					}
+					, error:function(){
+						alert("좋아요 에러");
+					}
+			});
+			
+			
+		});
+		
+		
+		$(".reply-btn").on("click",function(){
+
+			let postId = $(this).data("post-id");
+			
+			let commentId = reply + postId;
+			
+			let reply = commentId
+			
+			// 클릭 이벤트가 발생한 버튼 태그 객체
+			// post-id
+			// 버튼 태그 옆에 있는 태그
+			
+			$.ajax({
+					type:"post"
+					,url:"/post/comment/create"
+					,data:{"postId": postId, "contents":reply}
+					,success:function(data){
+						if(data.result == "success"){
+							location.reload();
+						} else {
+							alert("댓글 실패");
+						}
+					}
+					,error:function(){
+						alert("댓글 에러");
+					}
+				
+			});
+			
+			
+		});
+		
+		
+		
 		$("#postReplyBtn").on("click",function(){
 			let reply = $("#reply-content").val();
 			alert(reply);

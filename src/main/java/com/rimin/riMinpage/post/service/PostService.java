@@ -49,11 +49,12 @@ public class PostService {
 		List<PostDetail> postDetailList = new ArrayList<>(); 
 			
 		//조회된 결과를 그대로 리턴하는게 아니라 필요한 정보를 처리하고 나서 return
+		
+		//post정보랑 로그인 사용자 정보를 담은 객체를 생성
 		for(Post post:postList) {
 			//포스트에서 사용할 user와 관련된 기능이 있다면 userService 로 
 			int userId = post.getUserId();
 			User user = userService.getUserById(userId);
-			user.getLoginId();
 			
 			
 			PostDetail postDetail =  PostDetail.builder()//builder:멤버변수에 값을 채움

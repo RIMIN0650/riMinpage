@@ -22,14 +22,15 @@ public class PostController {
 	@GetMapping("/post/homepage")
 	public String mainPage(Model model) {
 		
-		
 		List<PostDetail> postList = postService.getPostList();
-		
 		model.addAttribute("postList", postList);
-		
 		
 		return "post/homepage";
 	}
+	
+	
+	
+	
 	
 	@GetMapping("/post/uploadpost")
 	public String uploadPost() {
