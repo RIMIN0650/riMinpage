@@ -118,27 +118,37 @@
 						alert("좋아요 에러");
 					}
 			});
-			
-			
 		});
 		
 		
 		$(".reply-btn").on("click",function(){
-
+			
+			
 			let postId = $(this).data("post-id");
 			
-			let commentId = reply + postId;
+			// let commentId = "reply" + postId;
+			// let reply = $('"#' + commentId + '"').val();
 			
-			let reply = commentId
+			
+			// post-id 를 활용한 방법
+			let content = $("#reply" + postId).val();
+			
 			
 			// 클릭 이벤트가 발생한 버튼 태그 객체
-			// post-id
+			// 태그 위치 기반으로 태그 얻어올 수 있음
+			// let content = $(this).prev().val();
+			// 태그구성은 수시로 바껴서 안정적이지 않음
+			
+			
+			
+			
+			
 			// 버튼 태그 옆에 있는 태그
 			
 			$.ajax({
 					type:"post"
 					,url:"/post/comment/create"
-					,data:{"postId": postId, "contents":reply}
+					,data:{"postId": postId, "contents":content}
 					,success:function(data){
 						if(data.result == "success"){
 							location.reload();

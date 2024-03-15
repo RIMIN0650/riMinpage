@@ -12,7 +12,8 @@ public class PostDetail {
 	private int postId; // pk는 들고다니면 유용하게 쓸 수 있음
 	private int userId; // pk는 들고다니면 유용하게 쓸 수 있음
 	private String userLoginId;
-	private String contents;
+	private String contents; // 게시글 내용
 	private String imagePath;
+	private String comment;
 	
 }
