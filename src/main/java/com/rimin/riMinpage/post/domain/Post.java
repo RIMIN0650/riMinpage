@@ -27,11 +27,9 @@ public class Post {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	
-	
 	@Column(name="userId")
 	private int userId;
 	private String contents;
-	
 	
 	@Column(name="imagePath")
 	private String imagePath;

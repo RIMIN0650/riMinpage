@@ -47,7 +47,7 @@
 					<div class="post-container bg-white mt-3 mb-3 card">
 						<div>
 							<div class="show-id d-flex justify-content-between align-items-end mx-1 mt-1">
-								@${post.userLoginId }
+								<h3>@${post.userLoginId }</h3>
 								<i class="bi bi-three-dots-vertical"></i>
 							</div>
 						</div>
@@ -55,9 +55,17 @@
 							<img src="${post.imagePath }" class="w-100">
 						</div>
 						<div class="d-flex justify-content-top align-items-center">
-							<button type="button" class="btn text-white like-icon" data-post-id="${post.postId }"><i class="bi bi-heart text-danger"></i></button>
-							<!-- <button type="button" class="btn d-none" id="fullHeartBtn"><i class="bi bi-heart-fill text-danger"></i></button>  -->
-							<div>14개</div>
+							<c:choose>
+								<c:when test="${post.like }">
+									<button type="button" class="btn text-white like-icon" data-like-id="${post.postId }"><i class="bi bi-heart-fill text-danger"></i></button>
+								</c:when>
+								<c:otherwise>
+								<button type="button" class="btn text-white like-icon" data-like-id="${post.postId }"><i class="bi bi-heart text-danger"></i></button>	
+								</c:otherwise>
+							
+							<%-- <button type="button" class="btn d-none" id="fullHeartBtn"><i class="bi bi-heart-fill text-danger"></i></button>  --%>
+							</c:choose>
+							<div>${post.likeCount }</div>
 						</div>
 						<div class="show-reply bg-warning my-1 mx-1 p-2">
 							<b>${post.userLoginId }</b> ${post.contents }
@@ -67,8 +75,11 @@
 						<div class="my-3 mx-1">
 							<div>
 								<div>댓글</div>
-								<div><b>asdf</b> &nbsp; zxcijuzcviizcxv!</div>
-								<div><b>asdf</b> &nbsp; zxcijuzcviizcxv!</div>
+								<div>
+									<%-- <c:forEach var="reply" items="${ }" >
+									<b>${reply.userId }</b> &nbsp; zxcijuzcviizcxv!
+									</c:forEach> --%>
+								</div>
 							</div>
 							<div class="d-flex justify-content-center align-items-center">
 								<input type="text" class="form-control text-input col-11 my-3 mr-1" id="reply${post.postId }">
@@ -98,15 +109,18 @@
 <script>
 	$(document).ready(function(){
 		
+		
+		//좋아요 기능
 		$(".like-icon").on("click",function(){
 			
 			//이벤트가 발생한 태그 객체 > this
-			let postId = $(this).data("post-id");
+			let likeId = $(this).data("like-id");
+			
 			
 			$.ajax({
 					type:"post"
 					, url:"/post/like"
-					, data:{"postId" : postId}
+					, data:{"postId" : likeId}
 					, success:function(data){
 						if(data.result == "success"){
 							location.reload();
@@ -121,13 +135,15 @@
 		});
 		
 		
+		// 댓글 달기
 		$(".reply-btn").on("click",function(){
 			
 			
 			let postId = $(this).data("post-id");
 			
-			// let commentId = "reply" + postId;
+			// let commentId = "#reply" + postId;
 			// let reply = $('"#' + commentId + '"').val();
+			// 위 두줄 방법으로 시도해보기
 			
 			
 			// post-id 를 활용한 방법

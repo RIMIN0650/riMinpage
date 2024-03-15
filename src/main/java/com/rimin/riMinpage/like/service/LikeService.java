@@ -26,7 +26,26 @@ public class LikeService {
 	}
 	
 	
+	// 좋아요 개수 얻어오기
+	public int getLikeCount(int postId) {
+		return likeRepository.countByPostId(postId);
+	}
 	
 	
-	
+	// > like는 특정 사용자가 특정 게시물에 좋아요를 눌렀는지 알려주는 기능
+	// select count(*) from `rimin_like` where postId = 1 AND `userId` = 3; 가 1 이상이면 좋아요를 눌렀다는 뜻
+	// 나중에 취소 기능 만들면 수정하기
+	public boolean isLike(int userId, int postId) {
+		int count = likeRepository.countByUserIdAndPostId(userId, postId);
+		
+//		if(count > 0) {
+//			// 특정 사용자가 특정 게시물에 좋아요 누른 상태
+//			return true;
+//		} else {
+//			// 특정 사용자가 특정 게시물에 좋아요 안 누른 상태
+//			return false;
+//		}
+
+		return count > 0;
+	}
 }
