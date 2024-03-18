@@ -74,7 +74,13 @@
 						<!-- reply -->
 						<div class="my-3 mx-1">
 							<div>
-								<div>댓글</div>
+								<div>
+								댓글<br>
+									<!--  comment entity class 안에 있는 변수 -->
+									<c:forEach var="comment" items="${post.commentList }">
+										${comment.userLoginId } - ${comment.contents }<br>
+									</c:forEach>
+								</div>
 								<div>
 									<%-- <c:forEach var="reply" items="${ }" >
 									<b>${reply.userId }</b> &nbsp; zxcijuzcviizcxv!

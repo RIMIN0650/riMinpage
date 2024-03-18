@@ -1,5 +1,9 @@
 package com.rimin.riMinpage.post.dto;
 
+import java.util.List;
+
+import com.rimin.riMinpage.comment.dto.CommentDetail;
+
 import lombok.Builder;
 import lombok.Getter;
 
@@ -22,4 +26,6 @@ public class PostDetail {
 	private String contents; // 게시글 내용
 	private String imagePath;
 	
+	
+	private List<CommentDetail> commentList; 
 }

@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.rimin.riMinpage.comment.dto.CommentDetail;
+import com.rimin.riMinpage.comment.service.CommentService;
 import com.rimin.riMinpage.common.FileManager;
 import com.rimin.riMinpage.like.service.LikeService;
 import com.rimin.riMinpage.post.domain.Post;
@@ -24,6 +26,8 @@ public class PostService {
 	@Autowired
 	private UserService userService;
 	
+	@Autowired
+	private CommentService commentService;
 	
 	// 좋아요 개수 세기 위한 기능 불러오기
 	@Autowired
@@ -74,8 +78,8 @@ public class PostService {
 			
 			
 			//댓글 목록 조회
-			
-			
+			// commentService & commentRepository
+			List<CommentDetail> commentList = commentService.getCommentList(post.getId());
 			
 			
 			PostDetail postDetail =  PostDetail.builder()//builder:멤버변수에 값을 채움
@@ -85,6 +89,7 @@ public class PostService {
 										.contents(post.getContents())
 										.imagePath(post.getImagePath())
 										.likeCount(likeCount)
+										.commentList(commentList)
 										.isLike(isLike)// 로그인한 사용자가 눌렀는지 안 눌렀는지
 										.build();
 			// postdetail안에 들어있던 객체가 postDetailList안에 저장됨
