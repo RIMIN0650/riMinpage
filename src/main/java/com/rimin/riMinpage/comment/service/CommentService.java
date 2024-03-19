@@ -29,8 +29,6 @@ public class CommentService {
 					.contents(contents)
 					.build();
 		
-		
-		
 		return commentRepository.save(comment);
 		
 	}

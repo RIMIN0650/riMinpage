@@ -48,7 +48,7 @@
 						<div>
 							<div class="show-id d-flex justify-content-between align-items-end mx-1 mt-1">
 								<h3>@${post.userLoginId }</h3>
-								<i class="bi bi-three-dots-vertical"></i>
+								<button type="button" class="btn btn-danger delete-btn" data-delete-id="${post.postId }"><i class="bi bi-three-dots-vertical"></i></button>
 							</div>
 						</div>
 						<div class="show-image bg-danger mx-1 my-1">
@@ -57,10 +57,10 @@
 						<div class="d-flex justify-content-top align-items-center">
 							<c:choose>
 								<c:when test="${post.like }">
-									<button type="button" class="btn text-white like-icon" data-like-id="${post.postId }"><i class="bi bi-heart-fill text-danger"></i></button>
+									<button type="button" class="btn text-white unlike-icon" data-post-id="${post.postId }"><i class="bi bi-heart-fill text-danger"></i></button>
 								</c:when>
 								<c:otherwise>
-								<button type="button" class="btn text-white like-icon" data-like-id="${post.postId }"><i class="bi bi-heart text-danger"></i></button>	
+								<button type="button" class="btn text-white like-icon" data-post-id="${post.postId }"><i class="bi bi-heart text-danger"></i></button>	
 								</c:otherwise>
 							
 							<%-- <button type="button" class="btn d-none" id="fullHeartBtn"><i class="bi bi-heart-fill text-danger"></i></button>  --%>
@@ -105,8 +105,21 @@
 		</footer>
 	</div>
 
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#moreModal">
+  Launch demo modal
+</button>
+<!-- Modal -->
+<div class="modal fade" id="moreModal">
+  <div class="modal-dialog modal-dialog-centered">
+  <!-- modal-dialog-centered : 화면 중앙에 띄워주기 -->
+    <div class="modal-content">
+      <div class="modal-body text-center">
+        <button type="button" class="btn btn-danger">삭제하기</button>
+      </div>
 
-
+    </div>
+  </div>
+</div>
 	
 <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
@@ -115,13 +128,32 @@
 <script>
 	$(document).ready(function(){
 		
-		
+		$(".delete-btn").on("click",function(){
+			let deleteId = $(this).data("delete-id");
+			
+			$.ajax({
+					type:"delete"
+					, url:"/post/delete"
+					, data:{"id" : deleteId}
+					, success:function(data){
+						if(data.result == "success"){
+							location.reload();
+						} else {
+							alert("좋아요 실패");
+						}
+					}
+					, error:function(){
+						alert("좋아요 에러");
+					}
+			});
+			
+		});
+
 		//좋아요 기능
 		$(".like-icon").on("click",function(){
 			
 			//이벤트가 발생한 태그 객체 > this
-			let likeId = $(this).data("like-id");
-			
+			let likeId = $(this).data("post-id");
 			
 			$.ajax({
 					type:"post"
@@ -139,34 +171,53 @@
 					}
 			});
 		});
+
+		// 좋아요 취소 버튼
+		$(".unlike-icon").on("click",function(){
+			let unlikeId = $(this).data("post-id");
+			
+			$.ajax({
+					type:"delete"
+					, url:"/post/unlike"
+					, data:{"postId":unlikeId}
+					, success:function(data){
+						if(data.result == "success"){
+							location.reload();
+						} else {
+							alert("좋아요 취소 실패");
+						}
+					}
+					, error:function(){
+						alert("좋아요 취소 에러");
+					}
+				
+			});
+		});
+		
+		
+		
+		
+		
 		
 		
 		// 댓글 달기
 		$(".reply-btn").on("click",function(){
-			
-			
+
 			let postId = $(this).data("post-id");
 			
 			// let commentId = "#reply" + postId;
 			// let reply = $('"#' + commentId + '"').val();
 			// 위 두줄 방법으로 시도해보기
 			
-			
 			// post-id 를 활용한 방법
 			let content = $("#reply" + postId).val();
-			
 			
 			// 클릭 이벤트가 발생한 버튼 태그 객체
 			// 태그 위치 기반으로 태그 얻어올 수 있음
 			// let content = $(this).prev().val();
 			// 태그구성은 수시로 바껴서 안정적이지 않음
 			
-			
-			
-			
-			
 			// 버튼 태그 옆에 있는 태그
-			
 			$.ajax({
 					type:"post"
 					,url:"/post/comment/create"
@@ -181,23 +232,20 @@
 					,error:function(){
 						alert("댓글 에러");
 					}
-				
 			});
-			
-			
 		});
-		
-		
 		
 		$("#postReplyBtn").on("click",function(){
 			let reply = $("#reply-content").val();
 			alert(reply);
 		});
+		
 		$("#emptyHeartBtn").on("click",function(){
 			alert("좋아요");
 			$("#emptyHeartBtn").addClass("d-none");
 			$("#fullHeartBtn").removeClass("d-none");
 		});
+		
 		$("#fullHeartBtn").on("click",function(){
 			alert("좋아요 취소");
 			$("#emptyHeartBtn").removeClass("d-none");
@@ -207,22 +255,26 @@
 		$("#homeBtn").on("click",function(){
 			alert("homeBtn");
 		});
+		
 		$("#msgBtn").on("click",function(){
 			alert("msgBtn");
 		});
+		
 		$("#searchBtn").on("click",function(){
 			alert("searchBtn");
 		});
+		
 		$("#likeBtn").on("click",function(){
 			alert("likeBtn");
 		});
+		
 		$("#addBtn").on("click",function(){
 			location.href = "/post/uploadpost";
 		});
+		
 		$("#settingBtn").on("click",function(){
 			alert("settingBtn");
 		});
-		
 		
 	});
 </script>

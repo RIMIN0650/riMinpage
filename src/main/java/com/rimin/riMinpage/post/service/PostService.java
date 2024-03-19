@@ -2,6 +2,7 @@ package com.rimin.riMinpage.post.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -98,4 +99,29 @@ public class PostService {
 		// 게시글 하나를 위한 postdetailList완성됨
 		return postDetailList;
 	}
+	
+	// 게시글 삭제 
+	public Post deletePost(int id) {
+		// 대상이 되는 게시글 정보 얻어오고
+		// 확인 후 그 정보 삭제해주기
+		// 게시글의 id 만 가져오면 되므로
+		Optional<Post> optionalPost = postRepository.findById(id);
+		Post post = optionalPost.orElse(null); // null인 경우 예외처리 해주기
+		
+		if(post != null) {
+			postRepository.delete(post);// 게시물 삭제
+			// 연결된 이미지도 삭제해줘야함
+			FileManager.removeFile(post.getImagePath());
+		}
+		return post;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

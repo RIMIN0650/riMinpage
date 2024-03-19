@@ -1,5 +1,7 @@
 package com.rimin.riMinpage.like.service;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -48,4 +50,27 @@ public class LikeService {
 
 		return count > 0;
 	}
+	
+	
+	public Like deleteLike(int postId, int userId) {
+		// 우리가 직접 만든 테이블은 직접 만들어줘야함
+		Optional<Like> optionalLike = likeRepository.findByPostIdAndUserId(postId, userId);
+		// null 일 수도 있어서 optional 만들어준거라 null일 경우 처리해주기
+		Like like = optionalLike.orElse(null);
+		
+		if(like != null) {
+			likeRepository.delete(like);
+		} 
+		// 조회된 결과가 있으면 삭제될 행 리턴
+		return like;
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 }
