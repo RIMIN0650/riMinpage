@@ -53,8 +53,6 @@ public class PostRestController {
 	public Map<String, String> deleteContents(@RequestParam("id") int id){
 		Post post = postService.deletePost(id);
 		
-		
-		
 		Map<String, String> resultMap = new HashMap<>();
 		if(post != null) {
 			resultMap.put("result", "success");

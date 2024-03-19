@@ -22,7 +22,9 @@ public interface LikeRepository extends JpaRepository<Like, Integer>  {
 	// 한 행의 정보가 null 일 수 있기 때문에
 	
 	
-	
+	// DELETE FROM `rimin_like` WHERE `postId` = #{}
+	// delete 는 return type 없음
+	public void deleteByPostId(int postId);
 	
 	
 	

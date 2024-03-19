@@ -14,6 +14,8 @@ public interface CommentRepository extends JpaRepository<Comment,Integer> {
 	public List<Comment> findByPostIdOrderByIdDesc(int postId);
 	
 	
-	
+	// primarykey 기반 삭제가 아니므로 직접 만들어서 수행해주기
+	// delete from `rimin_comment` where `postId` = #{}
+	public void deleteByPostId(int postId);
 	
 }

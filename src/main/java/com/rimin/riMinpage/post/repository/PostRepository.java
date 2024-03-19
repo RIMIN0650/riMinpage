@@ -12,8 +12,5 @@ public interface PostRepository extends JpaRepository<Post, Integer> {
 	// ORDER BY `id` DESC
 	public List<Post> findAllByOrderByIdDesc();
 		
-	
-	
-	
-	public List<Post> findAllByPostId();
+
 }

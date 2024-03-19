@@ -67,6 +67,18 @@ public class LikeService {
 	}
 	
 	
+	// 게시물 삭제됐을 때 좋아요 삭제
+	// postId 기반 삭제
+	public void deleteLikeByPostId(int postId){
+		// delete from `like` where `postid` = #{}
+		
+		// 좋아요는 좋아요가 0개일수도 있어서 어차피 조회를 한다고 해도 크게 의미를 가지지 않음
+		// post는 id 를 정확하게 전달해서 확인하기 때문 > 있는지 없는지 확인이 됨
+		// 좋아요는 있을수도 있고 없을 수도 있음
+		
+		likeRepository.deleteByPostId(postId);
+		
+	}
 	
 	
 	

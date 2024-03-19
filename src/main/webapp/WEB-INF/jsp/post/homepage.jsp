@@ -105,6 +105,9 @@
 		</footer>
 	</div>
 
+
+
+
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#moreModal">
   Launch demo modal
 </button>
@@ -128,6 +131,8 @@
 <script>
 	$(document).ready(function(){
 		
+		
+		// 게시물 삭제 버튼
 		$(".delete-btn").on("click",function(){
 			let deleteId = $(this).data("delete-id");
 			
@@ -139,11 +144,11 @@
 						if(data.result == "success"){
 							location.reload();
 						} else {
-							alert("좋아요 실패");
+							alert("삭제 실패");
 						}
 					}
 					, error:function(){
-						alert("좋아요 에러");
+						alert("삭제 에러");
 					}
 			});
 			
@@ -193,11 +198,6 @@
 				
 			});
 		});
-		
-		
-		
-		
-		
 		
 		
 		// 댓글 달기

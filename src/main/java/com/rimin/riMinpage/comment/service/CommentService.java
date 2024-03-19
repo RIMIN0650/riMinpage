@@ -65,7 +65,9 @@ public class CommentService {
 		
 	}
 	
-	
-	
+	// 삭제된 게시물의 댓글 지우기
+	public void deleteCommentByPostId(int postId){
+		commentRepository.deleteByPostId(postId);
+	}
 	
 }
