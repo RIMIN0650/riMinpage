@@ -21,6 +21,8 @@ public class CommentService {
 	@Autowired
 	private UserService userService;
 	
+	
+	// 댓글 작성
 	public Comment addComment(int userId, int postId, String contents){
 		
 		Comment comment = Comment.builder()

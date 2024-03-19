@@ -108,6 +108,9 @@ public class PostService {
 		Optional<Post> optionalPost = postRepository.findById(id);
 		Post post = optionalPost.orElse(null); // null인 경우 예외처리 해주기
 		
+		postRepository.findAllByPostId(postId);
+
+		
 		if(post != null) {
 			postRepository.delete(post);// 게시물 삭제
 			// 연결된 이미지도 삭제해줘야함
@@ -116,7 +119,9 @@ public class PostService {
 		return post;
 	}
 	
+	// 댓글 삭제
 	
+
 	
 	
 	
