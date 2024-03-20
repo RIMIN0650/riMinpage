@@ -12,6 +12,7 @@ import com.rimin.riMinpage.comment.domain.Comment;
 import com.rimin.riMinpage.comment.service.CommentService;
 
 import jakarta.servlet.http.HttpSession;
+import jakarta.transaction.Transactional;
 
 @RestController
 public class CommentRestController {
@@ -37,7 +38,6 @@ public class CommentRestController {
 		} else {
 			resultMap.put("result", "fail");
 		}
-		
 		return resultMap;
 		
 	}

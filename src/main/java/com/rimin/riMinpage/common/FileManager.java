@@ -19,8 +19,6 @@ public class FileManager {
 		
 		// 첨부파일이 없는 경우 아래 코드가 실행되지 않도록 null을 return
 
-		
-		
 	
 		String directoryName = "/" + userId + "_" + System.currentTimeMillis();
 		

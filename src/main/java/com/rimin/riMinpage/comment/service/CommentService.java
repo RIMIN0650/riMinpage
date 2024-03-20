@@ -12,6 +12,8 @@ import com.rimin.riMinpage.comment.repository.CommentRepository;
 import com.rimin.riMinpage.user.domain.User;
 import com.rimin.riMinpage.user.service.UserService;
 
+import jakarta.transaction.Transactional;
+
 @Service
 public class CommentService {
 	

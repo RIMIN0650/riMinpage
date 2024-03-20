@@ -48,7 +48,7 @@
 						<div>
 							<div class="show-id d-flex justify-content-between align-items-end mx-1 mt-1">
 								<h3>@${post.userLoginId }</h3>
-								<button type="button" class="btn btn-danger delete-btn" data-delete-id="${post.postId }"><i class="bi bi-three-dots-vertical"></i></button>
+								<button type="button" class="btn btn-danger delete-btn" data-delete-id="${post.postId }" data-toggle="modal" data-target="#moreModal"><i class="bi bi-three-dots-vertical"></i></button>
 							</div>
 						</div>
 						<div class="show-image bg-danger mx-1 my-1">
@@ -106,18 +106,13 @@
 	</div>
 
 
-
-
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#moreModal">
-  Launch demo modal
-</button>
 <!-- Modal -->
 <div class="modal fade" id="moreModal">
   <div class="modal-dialog modal-dialog-centered">
   <!-- modal-dialog-centered : 화면 중앙에 띄워주기 -->
     <div class="modal-content">
       <div class="modal-body text-center">
-        <button type="button" class="btn btn-danger">삭제하기</button>
+        <button type="button" class="btn btn-danger" id="deleteBtn">삭제하기</button>
       </div>
 
     </div>
@@ -131,26 +126,39 @@
 <script>
 	$(document).ready(function(){
 		
+		$("#deleteBtn").on("click",function(){
+		
+			// 원래 이벤트에 부여된 기능 취소
+			// href="#" 같은 경우
+			// click,function(e)  // e.preventDefault();
+
+			let deleteId = $(this).data("delete-id");
+			
+			alert(deleteId);
+			
+			$.ajax({
+				type:"delete"
+				, url:"/post/delete"
+				, data:{"id" : deleteId}
+				, success:function(data){
+					if(data.result == "success"){
+						location.reload();
+					} else {
+						alert("삭제 실패");
+					}
+				}
+				, error:function(){
+					alert("삭제 에러");
+				}
+			});
+		});
 		
 		// 게시물 삭제 버튼
 		$(".delete-btn").on("click",function(){
 			let deleteId = $(this).data("delete-id");
 			
-			$.ajax({
-					type:"delete"
-					, url:"/post/delete"
-					, data:{"id" : deleteId}
-					, success:function(data){
-						if(data.result == "success"){
-							location.reload();
-						} else {
-							alert("삭제 실패");
-						}
-					}
-					, error:function(){
-						alert("삭제 에러");
-					}
-			});
+			// 클릭된 delete-btn의 postid가 deleteBtn 태그의 data-post-id 속성값으로 전달되어야함
+			$("#deleteBtn").data("delete-id", deleteId);
 			
 		});
 

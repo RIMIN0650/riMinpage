@@ -77,11 +77,9 @@ public class PostService {
 			// 컨트롤러에서 얻어낼 수 있도록 파라미터 추가
 			boolean isLike = likeService.isLike(loginUserId, post.getId());
 			
-			
 			//댓글 목록 조회
 			// commentService & commentRepository
 			List<CommentDetail> commentList = commentService.getCommentList(post.getId());
-			
 			
 			PostDetail postDetail =  PostDetail.builder()//builder:멤버변수에 값을 채움
 										.postId(post.getId())
@@ -115,7 +113,6 @@ public class PostService {
 			// 좋아요와 댓글 삭제 > 좋아요와 댓글 service 에서 그 기능 만들기
 			// 특정한 게시물과 연관된 좋아요와 댓글 정보 > postId 
 			
-			
 			// 게시글 좋아요 데이터 삭제
 			likeService.deleteLikeByPostId(id); // 안에 id 가 삭제 대상의 id 이기 때문에 그냥 쓰면 됨
 			
@@ -123,19 +120,13 @@ public class PostService {
 			commentService.deleteCommentByPostId(id); // 안에 id 가 삭제 대상의 id 이기 때문에 그냥 쓰면 됨
 			
 			
-			postRepository.delete(post);// 게시물 삭제
 			// 연결된 이미지도 삭제해줘야함
 			FileManager.removeFile(post.getImagePath());
+			
+			postRepository.delete(post);// 게시물 삭제
 		}
 		return post;
 	}
-		
 
-	
-	
-	
-	
-	
-	
 	
 }

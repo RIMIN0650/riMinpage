@@ -51,6 +51,8 @@ public class PostRestController {
 	// 게시물 지워주기
 	@DeleteMapping("/post/delete")
 	public Map<String, String> deleteContents(@RequestParam("id") int id){
+		
+		// id 기반으로 조회
 		Post post = postService.deletePost(id);
 		
 		Map<String, String> resultMap = new HashMap<>();
@@ -61,9 +63,6 @@ public class PostRestController {
 		}
 		return resultMap;
 	}
-	
-	
-	// 댓글 지워주기
 	
 	
 	

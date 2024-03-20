@@ -6,6 +6,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.rimin.riMinpage.like.domain.Like;
 
+import jakarta.transaction.Transactional;
+
 public interface LikeRepository extends JpaRepository<Like, Integer>  {
 // generic : entity class & primary key type
 	
@@ -24,6 +26,7 @@ public interface LikeRepository extends JpaRepository<Like, Integer>  {
 	
 	// DELETE FROM `rimin_like` WHERE `postId` = #{}
 	// delete 는 return type 없음
+	@Transactional
 	public void deleteByPostId(int postId);
 	
 	
