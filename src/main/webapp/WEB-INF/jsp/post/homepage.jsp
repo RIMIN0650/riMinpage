@@ -134,8 +134,6 @@
 
 			let deleteId = $(this).data("delete-id");
 			
-			alert(deleteId);
-			
 			$.ajax({
 				type:"delete"
 				, url:"/post/delete"
