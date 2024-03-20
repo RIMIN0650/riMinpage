@@ -241,11 +241,6 @@
 			});
 		});
 		
-		$("#postReplyBtn").on("click",function(){
-			let reply = $("#reply-content").val();
-			alert(reply);
-		});
-		
 		$("#emptyHeartBtn").on("click",function(){
 			alert("좋아요");
 			$("#emptyHeartBtn").addClass("d-none");
